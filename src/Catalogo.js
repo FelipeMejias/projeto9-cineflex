@@ -19,6 +19,7 @@ export default function Catalogo(){
     )
 }
 const Main=styled.main`
+
      heigth:100%; width:100%; display:flex ;flex-direction:column;align-items:center; overflow:hidden; overflow-y:scroll;
      ul{display:flex;flex-direction:row;flex-wrap:wrap;width:90vw;heigth:100%;justify-content:center}
      div{display:flex;justify-content:center;align-items:center;height:15vh;}
