@@ -2,7 +2,7 @@ import styled from 'styled-components';
 export default function Menu(){
     return(
         <Header>
-            <h1>CINEFLAX</h1>
+            <h1>CINEFLEX</h1>
         </Header>
     )
 }

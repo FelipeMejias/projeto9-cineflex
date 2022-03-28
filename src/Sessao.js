@@ -12,7 +12,11 @@ export default function Sessao({setReserva}){
     const [numeros,setNumeros]=useState([])
     useEffect(()=>{
         const promessa=axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`)
-        promessa.then((resposta)=>{setAssentos(resposta.data.seats);setDados(resposta.data);console.log(resposta.data)})
+        promessa.then((resposta)=>{setAssentos(resposta.data.seats);setDados(resposta.data);setFooter(<>
+            <img src={resposta.data.movie.posterURL}></img>
+            <div><h1>{resposta.data.movie.title}</h1><h1>{resposta.data.day.date} - {resposta.data.name}</h1></div>
+            </>
+        )})
     },[])
     function selecionar(id,numero){
         setSelecionados([...selecionados,id])
@@ -36,6 +40,7 @@ export default function Sessao({setReserva}){
         })
         promessaPost.then()
     }
+    const [footer,setFooter]=useState('')
     return(
         
             <>
@@ -44,7 +49,13 @@ export default function Sessao({setReserva}){
             <ul>
                 {assentos.map(lugar=>{
                     if(selecionados.includes(lugar.id)){return <Bolinha onClick={()=>desSelecionar(lugar.id,lugar.name)} className="verde">{lugar.name}</Bolinha>}
-                    else{return <Bolinha onClick={()=>{if(lugar.isAvailable){selecionar(lugar.id,lugar.name)}}} className={lugar.isAvailable ? 'cinza' : 'amarelo'}>{lugar.name}</Bolinha>}
+                    else{return <Bolinha onClick={()=>{
+                        
+                                if(assentos[lugar.name-1].isAvailable){selecionar(lugar.id,lugar.name)}
+                            
+                        
+                        
+                    }} className={lugar.isAvailable ? 'cinza' : 'amarelo'}>{lugar.name}</Bolinha>}
 })}
             </ul>
             <span className='gabarito'>
@@ -67,7 +78,7 @@ export default function Sessao({setReserva}){
             </Link>
         </Main>
         <Footer>
-        
+            {footer}
         
         </Footer>
     </> 
